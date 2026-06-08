@@ -46,6 +46,14 @@ const exportCsvBtn = document.getElementById('exportCsvBtn');
 const exportJsonBtn = document.getElementById('exportJsonBtn');
 const exportZipBtn = document.getElementById('exportZipBtn');
 
+// Camera & Modal Elements
+const cameraBtn = document.getElementById('cameraBtn');
+const cameraModal = document.getElementById('cameraModal');
+const cameraVideo = document.getElementById('cameraVideo');
+const cameraCanvas = document.getElementById('cameraCanvas');
+const shutterBtn = document.getElementById('shutterBtn');
+const docModal = document.getElementById('docModal');
+
 // Init listeners
 document.addEventListener('DOMContentLoaded', () => {
     setupDragAndDrop();
@@ -53,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModelSelector();
     setupExportButtons();
     setupResponsiveNavigation();
+    setupCameraSupport();
 });
 
 // Drag & Drop Setup
@@ -589,5 +598,93 @@ function setupResponsiveNavigation() {
         }
     };
 }
+
+let cameraStream = null;
+
+// Documentation Modal Toggles
+window.showDocSection = function(tabId) {
+    if (docModal) {
+        docModal.classList.remove('hidden');
+    }
+    if (typeof window.switchDocTab === 'function') {
+        window.switchDocTab(tabId);
+    }
+    if (typeof window.closeMobileMenu === 'function') {
+        window.closeMobileMenu();
+    }
+};
+
+window.closeDocModal = function() {
+    if (docModal) {
+        docModal.classList.add('hidden');
+    }
+};
+
+window.closeCameraModal = function() {
+    if (cameraModal) {
+        cameraModal.classList.add('hidden');
+    }
+    // Stop camera video tracks
+    if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null;
+    }
+};
+
+function setupCameraSupport() {
+    if (!cameraBtn) return;
+    
+    cameraBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        if (typeof window.closeMobileMenu === 'function') {
+            window.closeMobileMenu();
+        }
+        
+        // Open modal
+        cameraModal.classList.remove('hidden');
+        
+        try {
+            // Request user media
+            cameraStream = await navigator.mediaDevices.getUserMedia({
+                video: { facingMode: 'environment' }, // use rear camera on mobile
+                audio: false
+            });
+            cameraVideo.srcObject = cameraStream;
+        } catch (err) {
+            console.error('Camera access error:', err);
+            alert('Failed to access camera. Please check camera permissions.');
+            window.closeCameraModal();
+        }
+    });
+    
+    // Snapping shutter photo
+    if (shutterBtn) {
+        shutterBtn.addEventListener('click', () => {
+            if (!cameraStream) return;
+            
+            // Set canvas size matching the video dimensions
+            cameraCanvas.width = cameraVideo.videoWidth;
+            cameraCanvas.height = cameraVideo.videoHeight;
+            
+            // Draw video frame to hidden canvas
+            const ctx = cameraCanvas.getContext('2d');
+            ctx.drawImage(cameraVideo, 0, 0, cameraCanvas.width, cameraCanvas.height);
+            
+            // Convert to blob and process
+            cameraCanvas.toBlob((blob) => {
+                if (blob) {
+                    const file = new File([blob], "captured_specimen.png", { type: "image/png" });
+                    
+                    // Stop camera streaming and close modal
+                    window.closeCameraModal();
+                    
+                    // Trigger pipeline
+                    runPipeline(file);
+                }
+            }, 'image/png');
+        });
+    }
+}
+
 
 

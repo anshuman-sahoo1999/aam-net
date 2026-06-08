@@ -41,9 +41,9 @@
                     <li class="nav-dropdown">
                         <a href="#documentationSection" class="nav-link dropdown-toggle" id="docDropdownToggle">Documentation <i class="fa-solid fa-chevron-down"></i></a>
                         <ul class="dropdown-menu-list">
-                            <li><a href="#documentationSection" onclick="switchDocTab('algorithms'); closeMobileMenu();">Pipeline Algorithms</a></li>
-                            <li><a href="#documentationSection" onclick="switchDocTab('mathematics'); closeMobileMenu();">Mathematical Formulas</a></li>
-                            <li><a href="#documentationSection" onclick="switchDocTab('developer'); closeMobileMenu();">Developer Info</a></li>
+                            <li><a href="javascript:void(0);" onclick="showDocSection('algorithms')">Pipeline Algorithms</a></li>
+                            <li><a href="javascript:void(0);" onclick="showDocSection('mathematics')">Mathematical Formulas</a></li>
+                            <li><a href="javascript:void(0);" onclick="showDocSection('developer')">Developer Info</a></li>
                         </ul>
                     </li>
                     <li><a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a></li>
@@ -56,12 +56,22 @@
     <main class="app-container">
         <!-- Main Form & Upload -->
         <section class="card upload-card" id="dropZone">
+            <!-- Animated Dotted Curly Arrow -->
+            <div class="curly-arrow-container">
+                <svg class="curly-dotted-arrow" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15,15 C45,5 50,45 70,55" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="5,4" class="arrow-path"/>
+                    <path d="M62,54 L72,56 L68,46" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <span class="arrow-label">Upload or Capture Here</span>
+            </div>
+
             <div class="upload-area">
                 <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
                 <h3>Drag & Drop Textile Image</h3>
                 <p>Supports PNG, JPG, JPEG (Max 10MB)</p>
                 <div class="file-input-wrapper">
-                    <button class="btn btn-primary" id="browseBtn">Browse Files</button>
+                    <button class="btn btn-primary" id="browseBtn"><i class="fa-solid fa-folder-open"></i> Browse Files</button>
+                    <button class="btn btn-secondary" id="cameraBtn"><i class="fa-solid fa-camera"></i> Capture Specimen</button>
                     <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" style="display:none;">
                 </div>
             </div>
@@ -207,98 +217,121 @@
             </div>
         </section>
 
-        <!-- Documentation Section -->
-        <section class="card doc-card" id="documentationSection">
-            <div class="card-header">
-                <h3><i class="fa-solid fa-book"></i> Framework Methodology & Documentation</h3>
-                <a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="btn btn-sm btn-secondary"><i class="fa-brands fa-github"></i> GitHub Repository</a>
-            </div>
-            
-            <div class="doc-tabs">
-                <button class="btn btn-sm btn-tab active" onclick="switchDocTab('algorithms')">Pipeline Algorithms</button>
-                <button class="btn btn-sm btn-tab" onclick="switchDocTab('mathematics')">Mathematical Formulas</button>
-                <button class="btn btn-sm btn-tab" onclick="switchDocTab('developer')">Developer Info & Collaboration</button>
-            </div>
-            
-            <div class="doc-content-wrapper">
-                <!-- Algorithms Tab -->
-                <div class="doc-tab-content" id="doc-algorithms">
-                    <div class="doc-step-item">
-                        <h4>1. Preprocessing Pipeline</h4>
-                        <p>Enhances contrast and removes noise from woven fabric specimens using CLAHE (Contrast Limited Adaptive Histogram Equalization) followed by Gaussian Blurring and Adaptive Gaussian Thresholding to produce a clean binary mask of repeating motifs.</p>
-                    </div>
-                    <div class="doc-step-item">
-                        <h4>2. Contour Segmentation</h4>
-                        <p>Applies OpenCV topological contour extraction to segment boundaries of repeating design motifs. Centroids and bounding boxes are calculated for every identified component.</p>
-                    </div>
-                    <div class="doc-step-item">
-                        <h4>3. Invariant Feature Extraction</h4>
-                        <p>Extracts hybrid geometric features (Area, Perimeter, Circularity), texture descriptors (GLCM Contrast, Energy, Homogeneity, and Correlation), scale/rotation invariant properties (Log Hu Moments), and structural edge filters (HOG & SIFT density).</p>
-                    </div>
-                    <div class="doc-step-item">
-                        <h4>4. PCA Orientation Mapping</h4>
-                        <p>Applies Singular Value Decomposition (SVD) on segmented coordinates to compute principal eigenvectors aligning with the motif's primary axis, giving precise mathematical angle mapping.</p>
-                    </div>
-                </div>
-
-                <!-- Mathematics Tab -->
-                <div class="doc-tab-content hidden" id="doc-mathematics">
-                    <div class="formula-grid">
-                        <div class="formula-box">
-                            <h5>PCA Centroid Localization</h5>
-                            <div class="math-display">
-                                $$\bar{x} = \frac{1}{N}\sum_{i=1}^{N} x_i, \quad \bar{y} = \frac{1}{N}\sum_{i=1}^{N} y_i$$
-                            </div>
-                            <p>Subtracts the centroid coordinates to center the contour data points.</p>
-                        </div>
-                        <div class="formula-box">
-                            <h5>Covariance Matrix (C)</h5>
-                            <div class="math-display">
-                                $$C = \frac{1}{N-1} P_{\text{centered}}^T P_{\text{centered}}$$
-                            </div>
-                            <p>Calculates the spatial spread of motif coordinates along 2D axes.</p>
-                        </div>
-                        <div class="formula-box">
-                            <h5>Eigen Decomposition & Angle</h5>
-                            <div class="math-display">
-                                $$\det(C - \lambda I) = 0 \implies \theta = \text{arctan2}(v_{1y}, v_{1x})$$
-                            </div>
-                            <p>Resolves eigenvalues (\(\lambda\)) and eigenvectors (\(v_1\)) to locate the principal orientation angle (\(\theta\)).</p>
-                        </div>
-                        <div class="formula-box">
-                            <h5>GLCM Homogeneity & Contrast</h5>
-                            <div class="math-display">
-                                $$\text{Homogeneity} = \sum_{i,j} \frac{P(i,j)}{1 + (i-j)^2}$$
-                                $$\text{Contrast} = \sum_{i,j} (i-j)^2 P(i,j)$$
-                            </div>
-                            <p>Measures local micro-texture regularity and contrast variance across weavings.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Developer Tab -->
-                <div class="doc-tab-content hidden" id="doc-developer">
-                    <div class="developer-info">
-                        <p class="dev-intro">
-                            This framework is developed as an intelligent system to bridge traditional handloom craftsmanship and tribal arts with modern computer vision and machine learning frameworks. By analyzing motif orientation and textures, AAM-Net enables digital archiving, weaving quality inspection, and pattern verification.
-                        </p>
-                        <div class="dev-card">
-                            <i class="fa-solid fa-user-tie dev-avatar"></i>
-                            <div>
-                                <h4 class="dev-name">Anshuman Sahoo</h4>
-                                <p class="dev-title">M. Tech Research Scholar</p>
-                                <p class="dev-collab">
-                                    For Documentation, research queries & further collaborations, please feel free to reach out to me:
-                                </p>
-                                <a href="mailto:mranshuman99@gmail.com" class="btn btn-primary btn-sm" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope"></i> mranshuman99@gmail.com</a>
-                                <a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="btn btn-secondary btn-sm" style="margin-bottom: 0.5rem;"><i class="fa-brands fa-github"></i> GitHub Project</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
+
+    <!-- Documentation Modal Overlay -->
+    <div class="modal-overlay hidden" id="docModal">
+        <div class="modal-container">
+            <button class="close-modal" onclick="closeDocModal()">&times;</button>
+            <section class="card doc-card" id="documentationSection" style="margin-top: 0; border: none; box-shadow: none; background: transparent;">
+                <div class="card-header">
+                    <h3><i class="fa-solid fa-book"></i> Framework Methodology & Documentation</h3>
+                    <a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="btn btn-sm btn-secondary"><i class="fa-brands fa-github"></i> GitHub Repository</a>
+                </div>
+                
+                <div class="doc-tabs">
+                    <button class="btn btn-sm btn-tab active" onclick="switchDocTab('algorithms')">Pipeline Algorithms</button>
+                    <button class="btn btn-sm btn-tab" onclick="switchDocTab('mathematics')">Mathematical Formulas</button>
+                    <button class="btn btn-sm btn-tab" onclick="switchDocTab('developer')">Developer Info & Collaboration</button>
+                </div>
+                
+                <div class="doc-content-wrapper">
+                    <!-- Algorithms Tab -->
+                    <div class="doc-tab-content" id="doc-algorithms">
+                        <div class="doc-step-item">
+                            <h4>1. Preprocessing Pipeline</h4>
+                            <p>Enhances contrast and removes noise from woven fabric specimens using CLAHE (Contrast Limited Adaptive Histogram Equalization) followed by Gaussian Blurring and Adaptive Gaussian Thresholding to produce a clean binary mask of repeating motifs.</p>
+                        </div>
+                        <div class="doc-step-item">
+                            <h4>2. Contour Segmentation</h4>
+                            <p>Applies OpenCV topological contour extraction to segment boundaries of repeating design motifs. Centroids and bounding boxes are calculated for every identified component.</p>
+                        </div>
+                        <div class="doc-step-item">
+                            <h4>3. Invariant Feature Extraction</h4>
+                            <p>Extracts hybrid geometric features (Area, Perimeter, Circularity), texture descriptors (GLCM Contrast, Energy, Homogeneity, and Correlation), scale/rotation invariant properties (Log Hu Moments), and structural edge filters (HOG & SIFT density).</p>
+                        </div>
+                        <div class="doc-step-item">
+                            <h4>4. PCA Orientation Mapping</h4>
+                            <p>Applies Singular Value Decomposition (SVD) on segmented coordinates to compute principal eigenvectors aligning with the motif's primary axis, giving precise mathematical angle mapping.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mathematics Tab -->
+                    <div class="doc-tab-content hidden" id="doc-mathematics">
+                        <div class="formula-grid">
+                            <div class="formula-box">
+                                <h5>PCA Centroid Localization</h5>
+                                <div class="math-display">
+                                    $$\bar{x} = \frac{1}{N}\sum_{i=1}^{N} x_i, \quad \bar{y} = \frac{1}{N}\sum_{i=1}^{N} y_i$$
+                                </div>
+                                <p>Subtracts the centroid coordinates to center the contour data points.</p>
+                            </div>
+                            <div class="formula-box">
+                                <h5>Covariance Matrix (C)</h5>
+                                <div class="math-display">
+                                    $$C = \frac{1}{N-1} P_{\text{centered}}^T P_{\text{centered}}$$
+                                </div>
+                                <p>Calculates the spatial spread of motif coordinates along 2D axes.</p>
+                            </div>
+                            <div class="formula-box">
+                                <h5>Eigen Decomposition & Angle</h5>
+                                <div class="math-display">
+                                    $$\det(C - \lambda I) = 0 \implies \theta = \text{arctan2}(v_{1y}, v_{1x})$$
+                                </div>
+                                <p>Resolves eigenvalues (\(\lambda\)) and eigenvectors (\(v_1\)) to locate the principal orientation angle (\(\theta\)).</p>
+                            </div>
+                            <div class="formula-box">
+                                <h5>GLCM Homogeneity & Contrast</h5>
+                                <div class="math-display">
+                                    $$\text{Homogeneity} = \sum_{i,j} \frac{P(i,j)}{1 + (i-j)^2}$$
+                                    $$\text{Contrast} = \sum_{i,j} (i-j)^2 P(i,j)$$
+                                </div>
+                                <p>Measures local micro-texture regularity and contrast variance across weavings.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Developer Tab -->
+                    <div class="doc-tab-content hidden" id="doc-developer">
+                        <div class="developer-info">
+                            <p class="dev-intro">
+                                This framework is developed as an intelligent system to bridge traditional handloom craftsmanship and tribal arts with modern computer vision and machine learning frameworks. By analyzing motif orientation and textures, AAM-Net enables digital archiving, weaving quality inspection, and pattern verification.
+                            </p>
+                            <div class="dev-card">
+                                <i class="fa-solid fa-user-tie dev-avatar"></i>
+                                <div>
+                                    <h4 class="dev-name">Anshuman Sahoo</h4>
+                                    <p class="dev-title">M. Tech Research Scholar</p>
+                                    <p class="dev-collab">
+                                        For Documentation, research queries & further collaborations, please feel free to reach out to me:
+                                    </p>
+                                    <a href="mailto:mranshuman99@gmail.com" class="btn btn-primary btn-sm" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope"></i> mranshuman99@gmail.com</a>
+                                    <a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="btn btn-secondary btn-sm" style="margin-bottom: 0.5rem;"><i class="fa-brands fa-github"></i> GitHub Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Camera Capture Modal Overlay -->
+    <div class="modal-overlay hidden" id="cameraModal">
+        <div class="modal-container camera-modal-container">
+            <button class="close-modal" onclick="closeCameraModal()">&times;</button>
+            <div class="card-header">
+                <h3><i class="fa-solid fa-camera"></i> Live Specimen Shutter</h3>
+            </div>
+            <div class="camera-viewport-wrapper">
+                <video id="cameraVideo" autoplay playsinline></video>
+                <canvas id="cameraCanvas" style="display: none;"></canvas>
+            </div>
+            <div class="camera-controls">
+                <button class="btn btn-primary" id="shutterBtn"><i class="fa-solid fa-circle"></i> Snap Photo</button>
+            </div>
+        </div>
+    </div>
 
     <footer class="app-footer">
         <div class="temple-border-divider footer-divider"></div>

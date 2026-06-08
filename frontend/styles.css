@@ -897,4 +897,173 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Modal Overlay & Container */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(14, 10, 8, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: var(--transition);
+}
+
+.modal-overlay.hidden {
+    display: none !important;
+}
+
+.modal-container {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 900px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(16px);
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 2.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    line-height: 1;
+    z-index: 10;
+}
+
+.close-modal:hover {
+    color: var(--primary);
+}
+
+/* Responsive Math Equations */
+.math-display {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.math-display::-webkit-scrollbar {
+    height: 6px;
+}
+
+.math-display::-webkit-scrollbar-thumb {
+    background: rgba(212, 140, 55, 0.3);
+    border-radius: 4px;
+}
+
+/* Mobile responsive fixes for math and cards */
+@media (max-width: 768px) {
+    .math-display {
+        font-size: 0.8rem;
+        padding: 0.8rem;
+    }
+    .modal-container {
+        padding: 1.2rem;
+        width: 95%;
+    }
+    .curly-arrow-container {
+        display: none !important;
+    }
+}
+
+/* Animated Dotted Curly Arrow */
+.curly-arrow-container {
+    position: absolute;
+    top: -45px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.curly-dotted-arrow {
+    width: 65px;
+    height: 65px;
+    transform: rotate(-15deg);
+}
+
+.arrow-path {
+    stroke-dasharray: 8, 5;
+    animation: arrowDraw 2s infinite linear;
+}
+
+.arrow-label {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--primary);
+    transform: translateY(-8px);
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+@keyframes arrowDraw {
+    to {
+        stroke-dashoffset: -26;
+    }
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Camera viewport & live streaming styling */
+.camera-modal-container {
+    max-width: 550px;
+}
+
+.camera-viewport-wrapper {
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    margin: 1rem 0;
+}
+
+#cameraVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.camera-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+
 
