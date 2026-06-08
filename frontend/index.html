@@ -187,6 +187,98 @@
                 </div>
             </div>
         </section>
+
+        <!-- Documentation Section -->
+        <section class="card doc-card" id="documentationSection">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-book"></i> Framework Methodology & Documentation</h3>
+                <a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="btn btn-sm btn-secondary"><i class="fa-brands fa-github"></i> GitHub Repository</a>
+            </div>
+            
+            <div class="doc-tabs">
+                <button class="btn btn-sm btn-tab active" onclick="switchDocTab('algorithms')">Pipeline Algorithms</button>
+                <button class="btn btn-sm btn-tab" onclick="switchDocTab('mathematics')">Mathematical Formulas</button>
+                <button class="btn btn-sm btn-tab" onclick="switchDocTab('developer')">Developer Info & Collaboration</button>
+            </div>
+            
+            <div class="doc-content-wrapper">
+                <!-- Algorithms Tab -->
+                <div class="doc-tab-content" id="doc-algorithms">
+                    <div class="doc-step-item">
+                        <h4>1. Preprocessing Pipeline</h4>
+                        <p>Enhances contrast and removes noise from woven fabric specimens using CLAHE (Contrast Limited Adaptive Histogram Equalization) followed by Gaussian Blurring and Adaptive Gaussian Thresholding to produce a clean binary mask of repeating motifs.</p>
+                    </div>
+                    <div class="doc-step-item">
+                        <h4>2. Contour Segmentation</h4>
+                        <p>Applies OpenCV topological contour extraction to segment boundaries of repeating design motifs. Centroids and bounding boxes are calculated for every identified component.</p>
+                    </div>
+                    <div class="doc-step-item">
+                        <h4>3. Invariant Feature Extraction</h4>
+                        <p>Extracts hybrid geometric features (Area, Perimeter, Circularity), texture descriptors (GLCM Contrast, Energy, Homogeneity, and Correlation), scale/rotation invariant properties (Log Hu Moments), and structural edge filters (HOG & SIFT density).</p>
+                    </div>
+                    <div class="doc-step-item">
+                        <h4>4. PCA Orientation Mapping</h4>
+                        <p>Applies Singular Value Decomposition (SVD) on segmented coordinates to compute principal eigenvectors aligning with the motif's primary axis, giving precise mathematical angle mapping.</p>
+                    </div>
+                </div>
+
+                <!-- Mathematics Tab -->
+                <div class="doc-tab-content hidden" id="doc-mathematics">
+                    <div class="formula-grid">
+                        <div class="formula-box">
+                            <h5>PCA Centroid Localization</h5>
+                            <div class="math-display">
+                                X̄ = <sup>1</sup>/<sub>N</sub> ∑ x<sub>i</sub> &nbsp;&nbsp;&nbsp;&nbsp; Ȳ = <sup>1</sup>/<sub>N</sub> ∑ y<sub>i</sub>
+                            </div>
+                            <p>Subtracts the centroid coordinates to center the contour data points.</p>
+                        </div>
+                        <div class="formula-box">
+                            <h5>Covariance Matrix (C)</h5>
+                            <div class="math-display">
+                                C = <sup>1</sup>/<sub>N-1</sub> P<sub>centered</sub><sup>T</sup> P<sub>centered</sub>
+                            </div>
+                            <p>Calculates the spatial spread of motif coordinates along 2D axes.</p>
+                        </div>
+                        <div class="formula-box">
+                            <h5>Eigen Decomposition & Angle</h5>
+                            <div class="math-display">
+                                det(C - λI) = 0 &nbsp;&nbsp;→&nbsp;&nbsp; θ = arctan2(v<sub>1y</sub>, v<sub>1x</sub>)
+                            </div>
+                            <p>Resolves eigenvalues (λ) and eigenvectors (v<sub>1</sub>) to locate the principal orientation angle (θ).</p>
+                        </div>
+                        <div class="formula-box">
+                            <h5>GLCM Homogeneity & Contrast</h5>
+                            <div class="math-display font-small">
+                                Homogeneity = ∑ [ P(i,j) / (1 + |i-j|²) ] <br>
+                                Contrast = ∑ [ |i-j|² P(i,j) ]
+                            </div>
+                            <p>Measures local micro-texture regularity and contrast variance across weavings.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Developer Tab -->
+                <div class="doc-tab-content hidden" id="doc-developer">
+                    <div class="developer-info">
+                        <p class="dev-intro">
+                            This framework is developed as an intelligent system to bridge traditional handloom craftsmanship and tribal arts with modern computer vision and machine learning frameworks. By analyzing motif orientation and textures, AAM-Net enables digital archiving, weaving quality inspection, and pattern verification.
+                        </p>
+                        <div class="dev-card">
+                            <i class="fa-solid fa-user-tie dev-avatar"></i>
+                            <div>
+                                <h4 class="dev-name">Anshuman Sahoo</h4>
+                                <p class="dev-title">M. Tech Research Scholar</p>
+                                <p class="dev-collab">
+                                    For Documentation, research queries & further collaborations, please feel free to reach out to me:
+                                </p>
+                                <a href="mailto:mranshuman99@gmail.com" class="btn btn-primary btn-sm" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope"></i> mranshuman99@gmail.com</a>
+                                <a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="btn btn-secondary btn-sm" style="margin-bottom: 0.5rem;"><i class="fa-brands fa-github"></i> GitHub Project</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="app-footer">

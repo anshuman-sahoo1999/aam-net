@@ -521,3 +521,28 @@ function setupExportButtons() {
         window.open(`${API_BASE}/export?session_id=${state.sessionId}&format=zip`);
     });
 }
+
+// Documentation Tab Switcher
+window.switchDocTab = function(tabId) {
+    // Hide all tab content
+    const contents = document.querySelectorAll('.doc-tab-content');
+    contents.forEach(content => content.classList.add('hidden'));
+    
+    // Show selected tab content
+    const activeContent = document.getElementById(`doc-${tabId}`);
+    if (activeContent) {
+        activeContent.classList.remove('hidden');
+    }
+    
+    // Manage active state of buttons
+    const buttons = document.querySelectorAll('.doc-tabs .btn-tab');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        // Extract tab target from onclick attribute
+        const onclickAttr = btn.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes(tabId)) {
+            btn.classList.add('active');
+        }
+    });
+};
+

@@ -663,3 +663,111 @@ body {
     }
 }
 
+/* Documentation Card Styles */
+.doc-card {
+    margin-top: 1.5rem;
+}
+.doc-tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.doc-tab-content {
+    animation: fadeIn 0.4s ease;
+}
+.doc-step-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--primary);
+    padding: 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 1rem;
+}
+.doc-step-item h4 {
+    color: var(--secondary);
+    font-family: var(--font-heading);
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
+}
+.formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.formula-box {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.formula-box h5 {
+    color: var(--secondary);
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.4rem;
+}
+.math-display {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: bold;
+}
+.math-display.font-small {
+    font-size: 0.95rem;
+}
+.developer-info .dev-intro {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+.dev-card {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    background: rgba(212, 140, 55, 0.05);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+.dev-avatar {
+    font-size: 4rem;
+    color: var(--primary);
+}
+.dev-name {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: #fff;
+}
+.dev-title {
+    color: var(--secondary);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+.dev-collab {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+@media(max-width: 768px) {
+    .dev-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
