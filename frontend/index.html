@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- KaTeX for beautiful math equations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
     <!-- Chart.js for analytics -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="styles.css">
@@ -26,10 +30,25 @@
                     <p>An Angular-Aware Machine Learning Framework for Automated Motif Feature Extraction and Orientation Mapping in Traditional Handloom Textiles</p>
                 </div>
             </div>
-            <div class="header-badges">
-                <span class="badge"><i class="fa-solid fa-microchip"></i> OpenCV / ML Powered</span>
-                <span class="badge secondary"><i class="fa-solid fa-server"></i> In-Memory Engine</span>
-            </div>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#dropZone" class="nav-link">Analysis Canvas</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#documentationSection" class="nav-link dropdown-toggle" id="docDropdownToggle">Documentation <i class="fa-solid fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu-list">
+                            <li><a href="#documentationSection" onclick="switchDocTab('algorithms'); closeMobileMenu();">Pipeline Algorithms</a></li>
+                            <li><a href="#documentationSection" onclick="switchDocTab('mathematics'); closeMobileMenu();">Mathematical Formulas</a></li>
+                            <li><a href="#documentationSection" onclick="switchDocTab('developer'); closeMobileMenu();">Developer Info</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://github.com/anshuman-sahoo1999/aam-net" target="_blank" class="nav-link"><i class="fa-brands fa-github"></i> GitHub</a></li>
+                </ul>
+            </nav>
         </div>
         <div class="temple-border-divider"></div>
     </header>
@@ -228,29 +247,29 @@
                         <div class="formula-box">
                             <h5>PCA Centroid Localization</h5>
                             <div class="math-display">
-                                X̄ = <sup>1</sup>/<sub>N</sub> ∑ x<sub>i</sub> &nbsp;&nbsp;&nbsp;&nbsp; Ȳ = <sup>1</sup>/<sub>N</sub> ∑ y<sub>i</sub>
+                                $$\bar{x} = \frac{1}{N}\sum_{i=1}^{N} x_i, \quad \bar{y} = \frac{1}{N}\sum_{i=1}^{N} y_i$$
                             </div>
                             <p>Subtracts the centroid coordinates to center the contour data points.</p>
                         </div>
                         <div class="formula-box">
                             <h5>Covariance Matrix (C)</h5>
                             <div class="math-display">
-                                C = <sup>1</sup>/<sub>N-1</sub> P<sub>centered</sub><sup>T</sup> P<sub>centered</sub>
+                                $$C = \frac{1}{N-1} P_{\text{centered}}^T P_{\text{centered}}$$
                             </div>
                             <p>Calculates the spatial spread of motif coordinates along 2D axes.</p>
                         </div>
                         <div class="formula-box">
                             <h5>Eigen Decomposition & Angle</h5>
                             <div class="math-display">
-                                det(C - λI) = 0 &nbsp;&nbsp;→&nbsp;&nbsp; θ = arctan2(v<sub>1y</sub>, v<sub>1x</sub>)
+                                $$\det(C - \lambda I) = 0 \implies \theta = \text{arctan2}(v_{1y}, v_{1x})$$
                             </div>
-                            <p>Resolves eigenvalues (λ) and eigenvectors (v<sub>1</sub>) to locate the principal orientation angle (θ).</p>
+                            <p>Resolves eigenvalues (\(\lambda\)) and eigenvectors (\(v_1\)) to locate the principal orientation angle (\(\theta\)).</p>
                         </div>
                         <div class="formula-box">
                             <h5>GLCM Homogeneity & Contrast</h5>
-                            <div class="math-display font-small">
-                                Homogeneity = ∑ [ P(i,j) / (1 + |i-j|²) ] <br>
-                                Contrast = ∑ [ |i-j|² P(i,j) ]
+                            <div class="math-display">
+                                $$\text{Homogeneity} = \sum_{i,j} \frac{P(i,j)}{1 + (i-j)^2}$$
+                                $$\text{Contrast} = \sum_{i,j} (i-j)^2 P(i,j)$$
                             </div>
                             <p>Measures local micro-texture regularity and contrast variance across weavings.</p>
                         </div>

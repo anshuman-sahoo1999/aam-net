@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupViewTabs();
     setupModelSelector();
     setupExportButtons();
+    setupResponsiveNavigation();
 });
 
 // Drag & Drop Setup
@@ -545,4 +546,48 @@ window.switchDocTab = function(tabId) {
         }
     });
 };
+
+// Responsive Navigation Event Handlers
+function setupResponsiveNavigation() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const docDropdownToggle = document.getElementById('docDropdownToggle');
+    
+    // Toggle mobile menu drawer
+    if (navToggle) {
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle('active');
+        });
+    }
+    
+    // Toggle sub-dropdown list on mobile view when clicking "Documentation"
+    if (docDropdownToggle) {
+        docDropdownToggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
+                docDropdownToggle.parentElement.classList.toggle('active');
+            }
+        });
+    }
+    
+    // Close mobile menu if clicking anywhere else
+    document.addEventListener('click', () => {
+        if (navMenu && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+        }
+    });
+    
+    // Global helper to close mobile menu after clicking links
+    window.closeMobileMenu = function() {
+        if (navMenu) {
+            navMenu.classList.remove('active');
+            if (docDropdownToggle) {
+                docDropdownToggle.parentElement.classList.remove('active');
+            }
+        }
+    };
+}
+
 
