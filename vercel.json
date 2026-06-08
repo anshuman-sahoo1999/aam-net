@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/main.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/upload",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/extract-features",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/angle-map",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/classify",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/export",
+      "dest": "backend/main.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
+    }
+  ]
+}

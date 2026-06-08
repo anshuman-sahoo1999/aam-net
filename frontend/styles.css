@@ -1,0 +1,647 @@
+/* Root Variables & Colors - Tribal & Handloom Inspired */
+:root {
+    --bg-dark: hsl(14, 25%, 8%);
+    --bg-darker: hsl(14, 30%, 4%);
+    --card-bg: rgba(32, 24, 20, 0.75);
+    --card-border: rgba(212, 140, 55, 0.18);
+    --card-border-glow: rgba(212, 140, 55, 0.4);
+    
+    --primary: hsl(24, 75%, 54%);
+    --primary-glow: rgba(211, 94, 53, 0.4);
+    --primary-hover: hsl(24, 85%, 60%);
+    
+    --secondary: hsl(42, 75%, 52%);
+    --secondary-hover: hsl(42, 85%, 58%);
+    --accent-indigo: hsl(210, 60%, 55%);
+    --accent-teal: hsl(175, 60%, 42%);
+    
+    --text-main: hsl(30, 20%, 90%);
+    --text-muted: hsl(30, 12%, 65%);
+    --success: hsl(145, 65%, 45%);
+    --error: hsl(355, 75%, 50%);
+    
+    --font-heading: 'Marcellus', serif;
+    --font-body: 'Inter', sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(at 10% 20%, rgba(211, 94, 53, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(216, 162, 43, 0.08) 0px, transparent 50%),
+        /* Warp lines (vertical threads) */
+        linear-gradient(90deg, rgba(212, 140, 55, 0.02) 1px, transparent 1px),
+        /* Weft lines (horizontal threads) */
+        linear-gradient(0deg, rgba(212, 140, 55, 0.02) 1px, transparent 1px);
+    background-size: auto, auto, 6px 6px, 6px 6px;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    overflow-x: hidden;
+}
+
+/* Header */
+.app-header {
+    background: linear-gradient(180deg, var(--bg-darker) 0%, transparent 100%);
+    border-bottom: 1px solid var(--card-border);
+    padding: 1.5rem 2rem 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.brand-icon {
+    font-size: 2.4rem;
+    color: var(--secondary);
+    filter: drop-shadow(0 0 10px var(--primary-glow));
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.brand-text h1 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    background: linear-gradient(95deg, #fff 20%, var(--secondary) 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-text p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 750px;
+}
+
+.header-badges {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.badge {
+    background: rgba(212, 140, 55, 0.1);
+    border: 1px solid var(--card-border);
+    color: var(--secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge.secondary {
+    background: rgba(42, 173, 160, 0.1);
+    border-color: rgba(42, 173, 160, 0.2);
+    color: var(--accent-teal);
+}
+
+/* Traditional Handloom Temple Border Divider */
+.temple-border-divider {
+    height: 10px;
+    width: 100%;
+    margin-top: 1rem;
+    background-image: 
+        linear-gradient(135deg, var(--primary) 25%, transparent 25%), 
+        linear-gradient(225deg, var(--primary) 25%, transparent 25%);
+    background-position: 0 0, 0 0;
+    background-size: 10px 10px;
+    background-repeat: repeat-x;
+    opacity: 0.8;
+}
+
+.footer-divider {
+    margin: 0 0 1.5rem 0;
+    background-image: 
+        linear-gradient(45deg, var(--secondary) 25%, transparent 25%), 
+        linear-gradient(315deg, var(--secondary) 25%, transparent 25%);
+    background-size: 10px 10px;
+}
+
+/* Main Container */
+.app-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Cards (Glassmorphism) */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: var(--card-border-glow);
+    box-shadow: 0 8px 32px 0 rgba(212, 175, 55, 0.05);
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Upload Card & Zone */
+.upload-card {
+    cursor: pointer;
+    border: 2px dashed var(--card-border);
+    background: rgba(22, 18, 38, 0.4);
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.upload-card:hover, .upload-card.dragover {
+    border-color: var(--primary);
+    background: rgba(22, 18, 38, 0.8);
+}
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.upload-icon {
+    font-size: 3.5rem;
+    color: var(--primary);
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.upload-card:hover .upload-icon {
+    transform: translateY(-5px);
+    opacity: 1;
+}
+
+/* Progress Tracker */
+.progress-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+}
+
+.progress-bar-container {
+    background: rgba(255, 255, 255, 0.05);
+    height: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    width: 0%;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.pipeline-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.pipeline-steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    z-index: 1;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 2;
+    flex: 1;
+}
+
+.step-num {
+    background: var(--bg-darker);
+    border: 2px solid var(--card-border);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.step.active .step-num {
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.step.complete .step-num {
+    background: var(--success);
+    border-color: var(--success);
+    color: #fff;
+}
+
+.step span {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.step.active span {
+    color: #fff;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+}
+
+@media(max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Controls inside Card Header */
+.view-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-tab {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-tab.active, .btn-tab:hover {
+    background: var(--primary);
+    color: var(--bg-darker);
+    font-weight: 600;
+    border-color: var(--primary);
+}
+
+/* Canvas Viewport */
+.canvas-viewport {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.canvas-wrapper {
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#interactiveCanvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    cursor: crosshair;
+}
+
+.canvas-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.canvas-loader {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    border: none;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--bg-darker);
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-sm {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+.btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Stats */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Forms & Selects */
+.form-control {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--card-border);
+    color: #fff;
+    border-radius: 8px;
+    padding: 0.6rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-family: var(--font-body);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 5px var(--primary-glow);
+}
+
+/* Telemetry & Lists */
+.telemetry-body {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.empty-state {
+    margin: auto;
+    text-align: center;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.empty-state i {
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+.telemetry-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+}
+
+.telemetry-table th, .telemetry-table td {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.85rem;
+}
+
+.telemetry-table th {
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.telemetry-table td {
+    text-align: right;
+    font-weight: 600;
+}
+
+.telemetry-table tr:last-child td, .telemetry-table tr:last-child th {
+    border-bottom: none;
+}
+
+.class-prob-bar {
+    background: rgba(255,255,255,0.05);
+    height: 4px;
+    border-radius: 2px;
+    width: 100%;
+    margin-top: 2px;
+}
+
+.class-prob-fill {
+    background: var(--secondary);
+    height: 100%;
+    border-radius: 2px;
+}
+
+/* Export Actions */
+.export-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Charts Grid */
+.charts-card {
+    margin-top: 1rem;
+}
+
+.charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media(max-width: 768px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-container {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    padding: 3rem 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    margin-top: 4rem;
+}
+
+/* Utility classes */
+.hidden {
+    display: none !important;
+}
+
+/* Animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* Small Screens Mobile Adjustments */
+@media(max-width: 576px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    .view-controls {
+        justify-content: center;
+        gap: 0.25rem;
+    }
+    .export-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .export-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
