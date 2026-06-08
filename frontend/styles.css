@@ -593,10 +593,18 @@ body {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     padding: 1rem;
+    position: relative;
+    width: 100%;
+    min-height: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 250px;
+    overflow: hidden;
+}
+
+.chart-container canvas {
+    max-width: 100% !important;
+    max-height: 100% !important;
 }
 
 /* Footer */
@@ -628,6 +636,16 @@ body {
 
 /* Small Screens Mobile Adjustments */
 @media(max-width: 576px) {
+    .card {
+        padding: 1rem;
+    }
+    .charts-grid {
+        gap: 1rem;
+    }
+    .chart-container {
+        padding: 0.5rem;
+        min-height: 220px;
+    }
     .stats-grid {
         grid-template-columns: 1fr;
     }
